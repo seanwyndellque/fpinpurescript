@@ -1,13 +1,23 @@
-exports.fromCb = function(f) {
+exports.readFileImpl = function(path, onSuccess, onFailure) {
   return function() {
-    return new Promise(function(resolve) {
-      resolve(f());
+    require('fs').readFile(path, function(error, data) {
+      if (error) {
+        onFailure(error.code)();
+      } else {
+        onSuccess(data)();
+      }
     });
   };
 };
 
-exports.runAsync = function(async) {
+exports.writeFileImpl = function(path, data, onSuccess, onFailure) {
   return function() {
-    async();
+    require('fs').writeFile(path, data, function(error) {
+      if (error) {
+        onFailure(error.code)();
+      } else {
+        onSuccess();
+      }
+    });
   };
 };

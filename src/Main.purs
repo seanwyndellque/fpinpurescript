@@ -5,16 +5,16 @@ import Data.Lazy
 import Data.Tuple
 import Prelude
 
-import Async (runAsync, x)
-import Chapter4 (List(Nil), (:), Option(..))
-import Debug.Trace (spy, trace)
+import Async (copyFileAsync)
 import Effect (Effect)
-import Effect.Console (log, logShow)
+import Effect.Console (logShow)
 
 main :: Effect Unit
 main = do
-  logShow $ toList $ take (constant' 10) 5
-  runAsync x
+  logShow ""
+
+  -- logShow $ copyFileAsync "a.txt" "b.txt"
+  -- runAsync x
   -- logShow $ toList $ take (from 10) 5
   -- logShow $ toList $ take iStream 5
   -- logShow $ toList $ take squareds 30
